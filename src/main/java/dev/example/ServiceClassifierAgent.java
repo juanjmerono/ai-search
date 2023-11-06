@@ -13,19 +13,28 @@ import dev.langchain4j.model.embedding.EmbeddingModel;
 public class ServiceClassifierAgent {
     
     private JPAServiceRepository jpaServiceRepository;
-    private CustomServiceClassifierAgent customClassifier;
+    private CustomServiceClassifierAgent customClassifierL6, customClassifierE5;
 
-    public ServiceClassifierAgent(EmbeddingModel embeddingModel, JPAServiceRepository jpaServiceRepository) {
+    public ServiceClassifierAgent(EmbeddingModel embeddingModelL6, EmbeddingModel embeddingModelE5, JPAServiceRepository jpaServiceRepository) {
         this.jpaServiceRepository = jpaServiceRepository;
-        customClassifier = new CustomServiceClassifierAgent(embeddingModel, 
+        customClassifierL6 = new CustomServiceClassifierAgent(embeddingModelL6, 
+            jpaServiceRepository.findAll().stream()
+            .collect(Collectors.toMap(Service::id,Service::nameAndDescList)), 
+            5, 0.601, 0.1);
+        customClassifierE5 = new CustomServiceClassifierAgent(embeddingModelE5, 
             jpaServiceRepository.findAll().stream()
             .collect(Collectors.toMap(Service::id,Service::nameAndDescList)), 
             5, 0.601, 0.1);
     }
 
 
-    public List<String> getServiceNames(String text) {
-        List<String> services = customClassifier.classify(text);
+    public List<String> getServiceNamesL6(String text) {
+        List<String> services = customClassifierL6.classify(text);
+        return services.stream().map(s -> jpaServiceRepository.findById(s).get().name()).collect(Collectors.toList());
+    }
+
+    public List<String> getServiceNamesE5(String text) {
+        List<String> services = customClassifierE5.classify(text);
         return services.stream().map(s -> jpaServiceRepository.findById(s).get().name()).collect(Collectors.toList());
     }
 

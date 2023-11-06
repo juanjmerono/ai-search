@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.junit.jupiter.api.Test;
@@ -53,18 +52,21 @@ class SearchApplicationTest {
         System.out.println("==========================================================================================");
         System.out.println("[User]: " + userMessage);
         System.out.println("==========================================================================================");
-        String agentAnswer0 = serviceClassifierAgent.getServiceNames(userMessage).toString();
-        String agentAnswer1 = serviceFinderAgent.getServiceNames(userMessage).toString();
-        String agentAnswer2 = serviceFinderAgent.getFuzzyServiceNames(userMessage).toString();
-        String agentAnswer3 = serviceFinderAgent.getPhraseServiceNames(userMessage).toString();
+        String agentAnswerL6 = serviceClassifierAgent.getServiceNamesL6(userMessage).toString();
+        String agentAnswerE5 = serviceClassifierAgent.getServiceNamesE5(userMessage).toString();
+        String agentAnswerQ1 = serviceFinderAgent.getServiceNames(userMessage).toString();
+        String agentAnswerF2 = serviceFinderAgent.getFuzzyServiceNames(userMessage).toString();
+        String agentAnswerP3 = serviceFinderAgent.getPhraseServiceNames(userMessage).toString();
         System.out.println("==========================================================================================");
-        System.out.println("[AgentIA]: " + agentAnswer0);
+        System.out.println("[AgentIAL6]: " + agentAnswerL6);
         System.out.println("==========================================================================================");
-        System.out.println("[AgentQuery]: " + agentAnswer1);
+        System.out.println("[AgentIAE5]: " + agentAnswerE5);
         System.out.println("==========================================================================================");
-        System.out.println("[AgentFuzzy]: " + agentAnswer2);
+        System.out.println("[AgentQuery]: " + agentAnswerQ1);
         System.out.println("==========================================================================================");
-        System.out.println("[AgentPhrase]: " + agentAnswer3);
+        System.out.println("[AgentFuzzy]: " + agentAnswerF2);
+        System.out.println("==========================================================================================");
+        System.out.println("[AgentPhrase]: " + agentAnswerP3);
         System.out.println("==========================================================================================");
     }
 
