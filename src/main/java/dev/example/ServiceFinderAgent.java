@@ -72,6 +72,7 @@ public class ServiceFinderAgent {
             .phrase()
             .withSlop(1)
             .onField("desc")
+            .andField("name")
             .sentence(text)
             .createQuery();
             

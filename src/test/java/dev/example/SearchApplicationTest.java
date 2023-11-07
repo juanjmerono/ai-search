@@ -45,7 +45,15 @@ class SearchApplicationTest {
         // Testing embeddings vs lucene
         interact(serviceClassifierAgent,serviceFinderAgent,"bigliografia");
         interact(serviceClassifierAgent,serviceFinderAgent,"bibliografía");
+        interact(serviceClassifierAgent,serviceFinderAgent,"libros");
+        interact(serviceClassifierAgent,serviceFinderAgent,"novelas");
         interact(serviceClassifierAgent,serviceFinderAgent,"cafés");
+        interact(serviceClassifierAgent,serviceFinderAgent,"almuerzo");
+        interact(serviceClassifierAgent,serviceFinderAgent,"montaña");
+        interact(serviceClassifierAgent,serviceFinderAgent,"playa");
+        interact(serviceClassifierAgent,serviceFinderAgent,"almanaque");
+        interact(serviceClassifierAgent,serviceFinderAgent,"llavero");
+        interact(serviceClassifierAgent,serviceFinderAgent,"ayuda experta");
     }
     
     private void interact(ServiceClassifierAgent serviceClassifierAgent, ServiceFinderAgent serviceFinderAgent, String userMessage) {
